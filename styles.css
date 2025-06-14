@@ -1,0 +1,504 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+  /* Use for backgrounds and cards (soft cream color) */
+  --cream: #fef6ec;
+  /* Use for strong accents or buttons (vivid red) */
+  --red: #ff0000;
+  /* Use for strong accents or buttons (deep navy) */
+  --navy: #000036;
+  /* Use for backgrounds and cards (light peachy orange) */
+  --peach: #ffcfac;
+  /* Use for highlights, borders, or subtle backgrounds (muted rose pink) */
+  --rose: #cd6e8a;
+  /* Use for backgrounds and cards (pale gold/yellow) */
+  --gold: #f5eab0;
+  /* Use for highlights, borders, or subtle backgrounds (muted beige) */
+  --sand: #d6c8a2;
+  /* Use for highlights, borders, or subtle backgrounds (muted mauve/purple) */
+  --mauve: #a2758d;
+  /* Use for overlays or text backgrounds (soft tan) */
+  --tan: rgb(245,228,212);
+  /* Use for overlays or text backgrounds (pure white) */
+  --white: rgb(255,255,255);
+  /* Use for highlights, borders, or subtle backgrounds (muted teal/gray) */
+  --tealgray: rgb(98,149,144);
+  /* Use for the correct answers*/
+  --green: #52b788;
+}
+
+.rubik-gemstones-regular {
+  font-family: "Rubik Gemstones", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+body {
+  min-height: 100vh;
+  background: radial-gradient(ellipse farthest-side at 76% 77%, rgba(245, 228, 212, 0.25) 4%, rgba(255, 255, 255, 0) calc(4% + 1px)),
+              radial-gradient(circle at 76% 40%, #fef6ec 4%, rgba(255, 255, 255, 0) 4.18%),
+              linear-gradient(135deg, #ff0000 0%, #000036 100%),
+              radial-gradient(ellipse at 28% 0%, #ffcfac 0%, rgba(98, 149, 144, 0.5) 100%),
+              linear-gradient(180deg, #cd6e8a 0%, #f5eab0 69%, #d6c8a2 70%, #a2758d 100%);
+  background-blend-mode: normal, normal, screen, overlay, normal;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+
+
+#container{
+  width: 100vw;
+}
+#title {
+    color: var(--tealgray);
+    justify-content: center;
+    padding-top: 20px;
+    font-size: larger;
+    text-align: center;
+    font-family: 'Rubik Gemstones', cursive;
+    font-size: 50px;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .fancy-header {
+    padding: 12px 4vw 10px 4vw;
+    border-radius: 18px;
+  }
+  .main-title {
+    font-size: 2rem;
+  }
+}
+
+@keyframes borderPop {
+  0% { transform: scale(0.95) rotate(-2deg); opacity: 0; }
+  70% { transform: scale(1.04) rotate(2deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.main-title {
+  font-family: 'Rubik Gemstones', cursive;
+  color: var(--navy);
+  font-size: 56px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 12px var(--cream);
+  margin: 0 0 0 0;
+  display: inline-block;
+}
+
+.heading-emoji {
+  font-size: 2.2rem;
+  vertical-align: middle;
+  display: inline-block;
+  margin: 0 8px;
+  transition: transform 0.3s;
+}
+.heading-emoji.left {
+  transform: rotate(-10deg);
+  color: var(--rose);
+}
+.heading-emoji.right {
+  transform: rotate(12deg);
+  color: var(--gold);
+}
+
+.sub-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: var(--tealgray);
+  margin-top: 8px;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .bordered-heading {
+    padding: 12px 8vw 10px 8vw;
+    border-radius: 18px;
+  }
+  .main-title {
+    font-size: 2rem;
+  }
+}
+
+.quiz-area {
+  max-width: 600px;
+  margin: 40px auto;
+  background: var(--cream); /* Soft card background */
+  border-radius: 15px;
+  padding: 20px 30px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.question-container {
+  margin-bottom: 20px;
+}
+
+#question-text {
+  font-size: 1.8rem;
+  color: var(--navy);
+  text-align: center;
+  font-weight: 600;
+}
+
+.answer-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.answer-btn {
+  background: var(--peach);
+  border: none;
+  border-radius: 10px;
+  padding: 15px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 204, 172, 0.4);
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.answer-btn:hover {
+  background: var(--rose);
+  transform: scale(1.05);
+  color: var(--white);
+}
+
+.answer-btn.correct {
+  background-color: var(--green);
+  color: var(--white);
+  animation: correctAnim 0.6s ease forwards;
+}
+
+.answer-btn.wrong {
+  background-color: var(--navy);
+  color: var(--white);
+  animation: wrongAnim 0.6s ease forwards;
+}
+
+.feedback {
+  margin-top: 20px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  min-height: 2em;
+  color: var(--navy);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.feedback.show {
+  opacity: 1;
+}
+
+@keyframes correctAnim {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1) rotate(5deg); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wrongAnim {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9) rotate(-5deg); }
+  100% { transform: scale(1); }
+}
+/* Progress Bar */
+.progress-bar {
+  width: 80%;
+  height: 8px;
+  background: var(--cream);
+  margin: 20px auto;
+  border-radius: 10px;
+}
+
+.progress {
+  height: 100%;
+  background: var(--red);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+/* Leaderboard */
+.leaderboard {
+  background: var(--cream);
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#leaderboard-list {
+  margin-top: 15px;
+  list-style: none;
+  padding: 0;
+}
+
+#leaderboard-list li {
+  padding: 10px;
+  margin: 5px 0;
+  background: var(--peach);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Question Animation */
+@keyframes questionPop {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.question-container {
+  animation: questionPop 0.5s ease;
+}
+.timer {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--navy);
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+#daily-challenge-btn {
+  background: linear-gradient(90deg, var(--rose), var(--gold));
+  color: var(--navy);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 18px auto 0 auto;
+  display: block;
+  box-shadow: 0 2px 8px #f5eab088;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+#daily-challenge-btn:hover {
+  background: linear-gradient(90deg, var(--gold), var(--rose));
+  color: var(--red);
+  transform: scale(1.04) rotate(-2deg);
+}
+.achievements-section {
+  background: var(--cream);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin: 25px auto;
+  box-shadow: 0 4px 16px #d6c8a2aa;
+  max-width: 400px;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--peach), var(--gold));
+  color: var(--navy);
+  border-radius: 50%;
+  width: 62px;
+  height: 62px;
+  line-height: 62px;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 8px;
+  box-shadow: 0 2px 8px #ffcfac55;
+  border: 2px solid var(--rose);
+  transition: transform 0.2s;
+}
+.badge.unlocked {
+  filter: none;
+  opacity: 1;
+}
+.badge.locked {
+  filter: grayscale(1) blur(1px);
+  opacity: 0.6;
+}
+.badge-label {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.95rem;
+  color: var(--navy);
+}
+
+/* Making the site responsive /*
+/* Base styles: already flexible with max-width and % widths */
+
+/* For tablets and below */
+@media (max-width: 900px) {
+  #container, .quiz-area, .leaderboard {
+    max-width: 98vw;
+    padding: 10px 2vw;
+  }
+  .quiz-area {
+    min-width: 0;
+    padding: 15px 5px;
+  }
+  #title {
+    font-size: 2rem;
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 600px) {
+  #container {
+    min-width: 100vw;
+    padding: 0;
+  }
+  #title {
+    font-size: 1.3rem;
+    padding: 12px 0;
+  }
+  .quiz-area {
+    padding: 10px 2vw;
+    border-radius: 8px;
+    min-width: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  #question-text {
+    font-size: 1rem;
+    min-height: 2.2em;
+  }
+  .answer-btn {
+    font-size: 1rem;
+    padding: 10px 8px;
+  }
+  .leaderboard, .achievements-section {
+    padding: 10px 2vw;
+    border-radius: 8px;
+  }
+  .progress-bar {
+    width: 96vw;
+    margin: 10px auto;
+  }
+}
+
+/* For very small screens */
+@media (max-width: 400px) {
+  #title {
+    font-size: 1rem;
+  }
+  .quiz-area, .leaderboard {
+    padding: 5px 1vw;
+  }
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%;}
+  100% { background-position: 100% 50%;}
+}
+body {
+  background-size: 200% 200%;
+  animation: gradientMove 12s linear infinite alternate;
+}
+html {
+  scroll-behavior: smooth;
+}
+@keyframes correctPulse {
+  0% { box-shadow: 0 0 0 0 var(--green);}
+  70% { box-shadow: 0 0 0 15px transparent;}
+  100% { box-shadow: 0 0 0 0 transparent;}
+}
+.answer-btn.correct {
+  animation: correctPulse 0.6s;
+}
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0);}
+  20%, 60% { transform: translateX(-8px);}
+  40%, 80% { transform: translateX(8px);}
+}
+.answer-btn.wrong {
+  animation: wrongShake 0.5s;
+}
+.progress {
+  transition: width 0.5s cubic-bezier(.57,1.32,.57,1);
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+.fade-in-up {
+  animation: fadeInUp 0.7s cubic-bezier(.57,1.32,.57,1) both;
+}
+/* Fade in for new content */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-in {
+  animation: fadeIn 0.5s;
+}
+
+/* Slide in for cards/sections */
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.slide-in-up {
+  animation: slideInUp 0.6s cubic-bezier(.57,1.32,.57,1) both;
+}
+
+/* Pulse for correct answer */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 var(--green, #52b788);}
+  70% { box-shadow: 0 0 0 10px transparent;}
+  100% { box-shadow: 0 0 0 0 transparent;}
+}
+.pulse {
+  animation: pulse 0.7s;
+}
+
+/* Progress bar smooth transition */
+.progress {
+  transition: width 0.5s cubic-bezier(.57,1.32,.57,1);
+}
+.cool-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.heading-emoji {
+  font-size: 2.2rem;
+  vertical-align: middle;
+  display: inline-block;
+  margin: 0 8px;
+  transition: transform 0.3s;
+}
+.heading-emoji.left {
+  transform: rotate(-10deg);
+  color: var(--rose);
+}
+.heading-emoji.right {
+  transform: rotate(12deg);
+  color: var(--gold);
+}
+
+.main-title {
+  font-family: 'Rubik Gemstones', cursive;
+  color: var(--navy);
+  font-size: 56px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 12px var(--cream);
+  margin: 0 0 0 0;
+  display: inline-block;
+}
+
+.sub-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: var(--tealgray);
+  margin-top: 8px;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+
+

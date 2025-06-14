@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ UP!!</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik+Gemstones&display=swap');
+    </style>
+    <script defer src="logic.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div class="header">
+            <header id="title">
+
+            QUIZ UP!!
+           </header>
+ </div>
+
+        <div id="quiz-area" class="quiz-area fade-in-up">
+          <div id="question-container" class="question-container">
+            <h2 id="question-text">Question will appear here</h2>
+          </div>
+          <div id="answer-buttons" class="answer-buttons"></div>
+          <div id="feedback" class="feedback"></div>
+          <div id="score" class="score"></div>
+        </div>
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+          <div id="progress" class="progress"></div>
+        </div>
+        <!-- Leaderboard -->
+        <div id="leaderboard" class="leaderboard">
+          <h2>🏆 Leaderboard</h2>
+          <ol id="leaderboard-list"></ol>
+        </div>
+        <!-- Daily Challenge Button -->
+        <button id="daily-challenge-btn" class="answer-btn">Daily Challenge</button>
+        <!-- Achievements Section (optional, for display) -->
+        <div class="achievements-section" id="achievements-section"></div>
+        <header id="title" class="cool-heading">
+  <span class="heading-emoji left">🚀</span>
+  <span class="main-title">QUIZ UP!!</span>
+  <span class="heading-emoji right">✨</span>
+  <div class="sub-title">
+    Challenge your mind. Climb the leaderboard. Have fun!
+  </div>
+</header>
+
+    </div>
+</body>
+</html>
